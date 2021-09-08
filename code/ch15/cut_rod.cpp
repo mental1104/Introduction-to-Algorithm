@@ -19,6 +19,13 @@ int main(int argc, char** argv){
         m = Method::BOTTOMUP;
 
     std::vector<int> p{0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
+    for(int i = 31; i <= 80; i=i+4){
+        p.push_back(i);
+        p.push_back(i+1);
+        p.push_back(i+2);
+        p.push_back(i+3);
+    }
+
 #ifdef DEBUG
     std::cout << CutRod::calculate(p, 1, m) << std::endl;
     std::cout << CutRod::calculate(p, 2, m) << std::endl;
@@ -30,6 +37,6 @@ int main(int argc, char** argv){
     std::cout << CutRod::calculate(p, 8, m) << std::endl;
     std::cout << CutRod::calculate(p, 9, m) << std::endl;
 #endif
-    std::cout << CutRod::calculate(p, 10, m) << std::endl;
+    std::cout << CutRod::calculate(p, 40, m) << std::endl;
     return 0;
 }

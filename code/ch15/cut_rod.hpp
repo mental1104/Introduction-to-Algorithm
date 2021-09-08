@@ -55,9 +55,10 @@ int
 CutRod::naive(const std::vector<int>& p, const int n){
     if(n == 0)
         return 0;
+
     int q = INT_MIN; 
     for(int i = 1; i <= n; ++i)
-        q = std::max(q, p.at(i)+naive(p, n-i));
+        q = std::max(q, p[i]+naive(p, n-i));
     return q;
 }
 
@@ -91,7 +92,7 @@ CutRod::bottomUp(const std::vector<int>& p, const int n){
     for(int j = 1; j<=n; ++j){
         int q = INT_MIN;
         for(int i = 1; i<=j; ++i)
-            q = std::max(q, p[i]+r[j-i]);
+            q = std::max(q, p[i]+r[j-i]);//j-i == 0 corner case.
         r[j] = q;
     }
     return r[n];
