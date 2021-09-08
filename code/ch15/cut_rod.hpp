@@ -17,8 +17,10 @@ public:
     static int calculate(const std::vector<int>& p, const int n, Method m);
 private:
     static int naive(const std::vector<int>& p, const int n);
+
     static int memoized(const std::vector<int>& p, const int n);
     static int memoizedAux(const std::vector<int>& p, const int n, std::vector<int>& r);
+
     static int bottomUp(const std::vector<int>& p, const int n);
 };
 
@@ -86,15 +88,27 @@ CutRod::memoizedAux(const std::vector<int>& p, const int n, std::vector<int>& r)
 
 int 
 CutRod::bottomUp(const std::vector<int>& p, const int n){
-    std::vector<int> r;
+    std::vector<int> r, s;
+    s.reserve(n+1);
     r.reserve(n+1);
     r[0] = 0;
     for(int j = 1; j<=n; ++j){
         int q = INT_MIN;
         for(int i = 1; i<=j; ++i)
-            q = std::max(q, p[i]+r[j-i]);//j-i == 0 corner case.
+            if(q < p[i]+r[j-i]){
+                q = p[i] + r[j-i];
+                s[j] = i;
+            }
+            //q = std::max(q, p[i]+r[j-i]);//j-i == 0 corner case.
         r[j] = q;
     }
+
+    int temp = n;
+    while(temp > 0){
+        std::cout << s[temp] << " ";
+        temp = temp - s[temp];
+    }
+    std::cout << std::endl;
     return r[n];
 }
 
