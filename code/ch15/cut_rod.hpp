@@ -14,19 +14,19 @@ enum class Method : int{
 
 class CutRod{
 public:
-    static int calculate(const std::vector<int>& p, const int n, Method m);
+    static long long calculate(const std::vector<int>& p, const int n, Method m);
 private:
-    static int naive(const std::vector<int>& p, const int n);
+    static long long naive(const std::vector<int>& p, const int n);
 
-    static int memoized(const std::vector<int>& p, const int n);
-    static int memoizedAux(const std::vector<int>& p, const int n, std::vector<int>& r);
+    static long long memoized(const std::vector<int>& p, const int n);
+    static long long memoizedAux(const std::vector<int>& p, const int n, std::vector<long long>& r);
 
-    static int bottomUp(const std::vector<int>& p, const int n);
+    static long long bottomUp(const std::vector<int>& p, const int n);
 };
 
-int 
+long long 
 CutRod::calculate(const std::vector<int>& p, const int n, Method m){
-    int res = 0;
+    unsigned long long res = 0;
     switch(m){
         case Method::MEMOIZED:
             #ifdef DEBUG
@@ -53,31 +53,31 @@ CutRod::calculate(const std::vector<int>& p, const int n, Method m){
     return res;
 }
 
-int
+long long
 CutRod::naive(const std::vector<int>& p, const int n){
     if(n == 0)
         return 0;
 
-    int q = INT_MIN; 
+    long long q = INT_MIN; 
     for(int i = 1; i <= n; ++i)
         q = std::max(q, p[i]+naive(p, n-i));
     return q;
 }
 
-int 
+long long
 CutRod::memoized(const std::vector<int>& p, const int n){
-    std::vector<int> r(n+1, INT_MIN);
+    std::vector<long long> r(n+1, INT_MIN);
     return memoizedAux(p, n, r);
 }  
 
-int 
-CutRod::memoizedAux(const std::vector<int>& p, const int n, std::vector<int>& r){
+long long
+CutRod::memoizedAux(const std::vector<int>& p, const int n, std::vector<long long>& r){
     if(r[n]>=0)
         return r[n];
 
-    int q = 0;
+    long long q = 0;
     if(n != 0){
-        q == INT_MIN;
+        q =  INT_MIN;
     
         for(int i = 1; i <= n; ++i)
             q = std::max(q, p[i] + memoizedAux(p, n-i, r));
@@ -86,14 +86,15 @@ CutRod::memoizedAux(const std::vector<int>& p, const int n, std::vector<int>& r)
     return q;
 }
 
-int 
+long long
 CutRod::bottomUp(const std::vector<int>& p, const int n){
-    std::vector<int> r, s;
+    std::vector<long long> r;
+    std::vector<int> s;
     s.reserve(n+1);
     r.reserve(n+1);
     r[0] = 0;
     for(int j = 1; j<=n; ++j){
-        int q = INT_MIN;
+        long long q = INT_MIN;
         for(int i = 1; i<=j; ++i)
             if(q < p[i]+r[j-i]){
                 q = p[i] + r[j-i];

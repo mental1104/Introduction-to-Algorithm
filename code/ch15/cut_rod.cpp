@@ -37,6 +37,10 @@ int main(int argc, char** argv){
     std::cout << CutRod::calculate(p, 8, m) << std::endl;
     std::cout << CutRod::calculate(p, 9, m) << std::endl;
 #endif
-    std::cout << CutRod::calculate(p, 10, m) << std::endl;
+    for(int i = 0; i <= 10; i++){
+        std::cout << i << ":\t ";
+        int val = CutRod::calculate(p, i, m);
+        std::cout << "Profit:\t" << val << std::endl;
+    }
     return 0;
 }
