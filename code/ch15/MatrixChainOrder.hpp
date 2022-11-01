@@ -90,9 +90,9 @@ MatrixChainOrder::S(){
 
 void 
 MatrixChainOrder::printOptimalParens(size_t i, size_t j){
-    if(i==j)
-		printf("A%lu",i);
-	else{
+    if(i==j) {
+        printf("A%lu",i);
+    } else {
 		printf("(");
 		printOptimalParens(i, s.at(i,j));
 		printOptimalParens(s.at(i,j)+1, j);
