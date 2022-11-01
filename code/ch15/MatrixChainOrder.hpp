@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <cstdio>
+#include <cfloat>
 
 using std::vector;
 using std::shared_ptr;
@@ -37,7 +38,7 @@ MatrixChainOrder::MatrixChainOrder(const vector<double>& p):p(p){
     for(int l = 2; l < n; l++){
         for(int i = 1; i <= n-l+1; i++){
             int j = i+l-1; ///////////////////////////
-            m.at(i, j) = -1;
+            m.at(i, j) = DBL_MAX;
             for(int k = i; k <= j-1; k++){
                 double q = m.at(i, k) + m.at(k+1, j) + p[i-1]*p[k]*p[j];
                 if(q < m.at(i,j) || m.at(i,j) == -1){
